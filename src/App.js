@@ -7,7 +7,7 @@ function App() {
   const [game, setGame] = useState(new Chess());
 
   function makeAMove(move) {
-    const gameCopy = game;
+    const gameCopy = { ...game };
     const result = gameCopy.move(move);
     setGame(gameCopy);
     return result; // null if the move was illegal, the move object if the move was legal
@@ -34,6 +34,7 @@ function App() {
     return true;
   }
 
+  console.log(game.pgn());
   return <Chessboard position={game.fen()} onPieceDrop={onDrop} />;
 }
 
