@@ -1,7 +1,6 @@
-import { Chess } from "chess.js";
 import { Chessboard } from "react-chessboard";
 
-function ChessEngine({ game, setGame }) {
+function ChessEngine({ game, setGame, boardWidth }) {
   var board = null;
   // var game = new Chess();
   var globalSum = 0; // always from black's perspective. Negative for white's perspective.
@@ -368,7 +367,7 @@ function ChessEngine({ game, setGame }) {
     }
   }
   console.log(game.pgn());
-  return <Chessboard position={game.fen()} onPieceDrop={onDrop} />;
+  return <Chessboard position={game.fen()} onPieceDrop={onDrop} boardWidth={boardWidth} />;
 }
 
 export default ChessEngine;

@@ -1,14 +1,33 @@
 import "./App.css";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Chess } from "./Chess";
-import { Chessboard } from "react-chessboard";
 import ChessEngine from "./Engine";
+import { useSize } from "./hooks";
 
 function App() {
   const [game, setGame] = useState(new Chess());
+  const [showGame, setShowGame] = useState(false);
+  const containerRef = useRef();
+  const { width } = useSize(containerRef);
+  console.log(width);
 
-  console.log(game.pgn());
-  return <ChessEngine game={game} setGame={setGame} />;
+  return (
+    <div className="main">
+      {!showGame ? (
+        <button
+          className="myButton"
+          onClick={() => {
+            setShowGame(true);
+          }}
+        >
+          New Game
+        </button>
+      ) : null}
+      <div ref={containerRef} className="board">
+        {showGame ? <ChessEngine boardWidth={width} game={game} setGame={setGame} /> : null}
+      </div>
+    </div>
+  );
 }
 
 export default App;
