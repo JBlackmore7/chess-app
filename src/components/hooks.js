@@ -57,3 +57,16 @@ const getSize = (el) => {
     height: el.offsetHeight,
   };
 };
+
+export const useModal = () => {
+  const [isShowing, setIsShowing] = useState(false);
+
+  function toggle() {
+    setIsShowing(!isShowing);
+  }
+
+  return {
+    isShowing,
+    toggle,
+  };
+};

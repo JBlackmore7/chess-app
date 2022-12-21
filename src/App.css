@@ -5,14 +5,19 @@ p {
 .board {
     display: flex;
     width: 100%;
+	max-width: 45rem;
+	align-self: center;
 }
 
 .main {
-
+	height: 100vh;
+	display: flex;
 }
 
 .myButton {
 	box-shadow: 3px 4px 0px 0px #1564ad;
+	height: 5rem;
+	width: 20rem;
 	background:linear-gradient(to bottom, #79bbff 5%, #378de5 100%);
 	background-color:#79bbff;
 	border-radius:5px;
@@ -37,3 +42,72 @@ p {
 	position:relative;
 	top:1px;
 }
+
+.App {
+	text-align: center;
+	padding-top: 2rem;
+  }
+  
+  .modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1040;
+	width: 100vw;
+	height: 100vh;
+	background-color: #000;
+	opacity: .5;
+  }
+  
+  .modal-wrapper {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1050;
+	width: 100%;
+	height: 100%;
+	overflow-x: hidden;
+	overflow-y: auto;
+	outline: 0;
+  }
+  
+  .modal {
+	z-index: 100;
+	background: white;
+	position: relative;
+	margin: 1.75rem auto;
+	border-radius: 3px;
+	max-width: 500px;
+	padding: 1rem;
+  }
+  
+  .modal-header {
+	display: flex;
+	justify-content: flex-end;
+	position: relative;
+  }
+  
+  .modal-close-button {
+	font-size: 1.4rem;
+	font-weight: 700;
+	line-height: 1;
+	color: #000;
+	opacity: .3;
+	cursor: pointer;
+	border: none;
+	position: absolute;
+  }
+  
+  button {
+	font-size: .9rem;
+	font-weight: 700;
+	border: none;
+	border-radius: 3px;
+	padding: .3rem 1rem;
+	margin-left: .5rem;
+  }
+  
+  .button-default {
+	background: #247BA0;
+	color: #fff;
+  }
