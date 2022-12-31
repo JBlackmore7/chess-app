@@ -12,6 +12,7 @@ function App() {
   const containerRef = useRef();
   const { width } = useSize(containerRef);
   const { isShowing, toggle } = useModal();
+  const [boardOrientation, setBoardOrientation] = useState("white");
   console.log(width);
 
   return (
@@ -28,17 +29,33 @@ function App() {
       ) : null}
       <Modal isShowing={isShowing} hide={toggle}>
         <button
-          className="myButton"
+          className="playAsWhite"
           onClick={() => {
             setShowGame(true);
             toggle();
           }}
         >
+          <img src={require("./images/white-king.png")} alt=""></img>
+          <br></br>
           Play as White
+        </button>
+        <button
+          className="playAsBlack"
+          onClick={() => {
+            setShowGame(true);
+            toggle();
+            setBoardOrientation("black");
+          }}
+        >
+          <img src={require("./images/black-king.png")} alt=""></img>
+          <br></br>
+          Play as Black
         </button>
       </Modal>
       <div ref={containerRef} className="board">
-        {showGame ? <ChessEngine boardWidth={width} game={game} setGame={setGame} /> : null}
+        {showGame ? (
+          <ChessEngine boardWidth={width} game={game} setGame={setGame} boardOrientation={boardOrientation} />
+        ) : null}
       </div>
     </div>
   );

@@ -1,12 +1,12 @@
 import { Chessboard } from "react-chessboard";
+import { useEffect } from "react";
 
-function ChessEngine({ game, setGame, boardWidth }) {
+function ChessEngine({ game, setGame, boardWidth, boardOrientation }) {
   var board = null;
   // var game = new Chess();
   var globalSum = 0; // always from black's perspective. Negative for white's perspective.
   var whiteSquareGrey = "#a9a9a9";
   var blackSquareGrey = "#696969";
-
   var squareClass = "square-55d63";
   var squareToHighlight = null;
   var colorToHighlight = null;
@@ -328,7 +328,7 @@ function ChessEngine({ game, setGame, boardWidth }) {
     }
   }
 
-  function checkStatus(color) {
+  function checkStatus() {
     if (game.in_checkmate()) {
     } else if (game.in_check()) {
       return false;
@@ -355,19 +355,35 @@ function ChessEngine({ game, setGame, boardWidth }) {
 
     // Illegal move
     if (move === null) return "snapback";
+    const computerColor = boardOrientation === "white" ? "b" : "w";
+    globalSum = evaluateBoard(game, move, globalSum, computerColor);
 
-    globalSum = evaluateBoard(game, move, globalSum, "b");
-
-    if (!checkStatus("black"));
+    if (!checkStatus());
     {
       // Make the best move for black
       window.setTimeout(function () {
-        makeBestMove("b");
+        makeBestMove(computerColor);
       }, 250);
     }
   }
+
+  useEffect(() => {
+    if (boardOrientation === "black") {
+      window.setTimeout(function () {
+        makeBestMove("w");
+      }, 250);
+    }
+  }, [boardOrientation]);
+
   console.log(game.pgn());
-  return <Chessboard position={game.fen()} onPieceDrop={onDrop} boardWidth={boardWidth} />;
+  return (
+    <Chessboard
+      position={game.fen()}
+      onPieceDrop={onDrop}
+      boardWidth={boardWidth}
+      boardOrientation={boardOrientation}
+    />
+  );
 }
 
 export default ChessEngine;

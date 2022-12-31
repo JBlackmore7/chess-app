@@ -1,20 +1,44 @@
-p {
-    color: white;
+body {
+	margin: 0;
 }
 
 .board {
     display: flex;
     width: 100%;
-	max-width: 45rem;
+	max-width: 40rem;
 	align-self: center;
 }
 
 .main {
 	height: 100vh;
 	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background: rgb(2,0,36);
+	background-image: url("./images/chessart-vert.jpg");
+	background-size: 100% 100%;
 }
 
-.myButton {
+.myButton{
+	max-width: 30%;
+	padding:0.35em 1.2em;
+	border:0.1em solid #FFFFFF;
+	margin:9em 0.3em 0.3em 0em;
+	border-radius:0.12em;
+	box-sizing: border-box;
+	text-decoration:none;
+	font-family:'Roboto',sans-serif;
+	font-weight:300;
+	color:#000000;
+	text-align:center;
+	transition: all 0.2s;
+}
+.myButton:hover{
+	color:#000000;
+	background-color:#FFFFFF;
+}
+
+/* .myButton {
 	box-shadow: 3px 4px 0px 0px #1564ad;
 	height: 5rem;
 	width: 20rem;
@@ -33,6 +57,7 @@ p {
 	padding:12px 44px;
 	text-decoration:none;
 	text-shadow:0px 1px 0px #528ecc;
+	margin: 0;
 }
 .myButton:hover {
 	background:linear-gradient(to bottom, #378de5 5%, #79bbff 100%);
@@ -41,6 +66,10 @@ p {
 .myButton:active {
 	position:relative;
 	top:1px;
+} */
+
+.playAsWhite img, .playAsBlack img {
+	max-width: 100px;
 }
 
 .App {
