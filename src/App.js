@@ -13,6 +13,7 @@ function App() {
   const { width } = useSize(containerRef);
   const { isShowing, toggle } = useModal();
   const [boardOrientation, setBoardOrientation] = useState("white");
+  const [gameEndModal, setGameEndModal] = useState(null);
   console.log(width);
 
   return (
@@ -52,9 +53,16 @@ function App() {
           Play as Black
         </button>
       </Modal>
+      {gameEndModal}
       <div ref={containerRef} className="board">
         {showGame ? (
-          <ChessEngine boardWidth={width} game={game} setGame={setGame} boardOrientation={boardOrientation} />
+          <ChessEngine
+            boardWidth={width}
+            game={game}
+            setGame={setGame}
+            boardOrientation={boardOrientation}
+            setGameEndModal={setGameEndModal}
+          />
         ) : null}
       </div>
     </div>

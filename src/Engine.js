@@ -1,7 +1,8 @@
 import { Chessboard } from "react-chessboard";
 import { useEffect } from "react";
+import Modal from "./components/Modal";
 
-function ChessEngine({ game, setGame, boardWidth, boardOrientation }) {
+function ChessEngine({ game, setGame, boardWidth, boardOrientation, setGameEndModal }) {
   var board = null;
   // var game = new Chess();
   var globalSum = 0; // always from black's perspective. Negative for white's perspective.
@@ -328,9 +329,51 @@ function ChessEngine({ game, setGame, boardWidth, boardOrientation }) {
     }
   }
 
+  // function checkStatus() {
+  //   if (game.in_checkmate()) {
+  //   } else if (game.in_check()) {
+  //     return false;
+  //   } else {
+  //     return false;
+  //   }
+  //   return true;
+  // }
+
   function checkStatus() {
     if (game.in_checkmate()) {
+      //modal for gameover... white/black wins
+      setGameEndModal(
+        <Modal isShowing={true} hide={() => setGameEndModal(null)}>
+          <div>Game Over</div>
+          <p>by checkmate</p>
+        </Modal>
+      );
+    } else if (game.insufficient_material()) {
+      //modal for draw... insufficient material
+      <Modal>
+        <div>Draw</div>
+        <p>by insufficient material</p>
+      </Modal>;
+    } else if (game.in_threefold_repetition()) {
+      //modal for draw... threefold repetition
+      <Modal>
+        <div>Draw</div>
+        <p>by threefold repetition</p>
+      </Modal>;
+    } else if (game.in_stalemate()) {
+      //modal for draw... stalemate
+      <Modal>
+        <div>Draw</div>
+        <p>by stalemate</p>
+      </Modal>;
+    } else if (game.in_draw()) {
+      //modal for draw... 50 move rule
+      <Modal>
+        <div>Draw</div>
+        <p>by 50 move rule</p>
+      </Modal>;
     } else if (game.in_check()) {
+      //not sure how this works yet... hopefully red outline around king
       return false;
     } else {
       return false;
@@ -363,6 +406,7 @@ function ChessEngine({ game, setGame, boardWidth, boardOrientation }) {
       // Make the best move for black
       window.setTimeout(function () {
         makeBestMove(computerColor);
+        checkStatus();
       }, 250);
     }
   }

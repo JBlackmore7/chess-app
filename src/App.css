@@ -106,7 +106,7 @@ body {
 	position: relative;
 	margin: 1.75rem auto;
 	border-radius: 3px;
-	max-width: 500px;
+	max-width: 300px;
 	padding: 1rem;
   }
   
@@ -117,14 +117,15 @@ body {
   }
   
   .modal-close-button {
-	font-size: 1.4rem;
+	font-size: 1.3rem;
 	font-weight: 700;
-	line-height: 1;
-	color: #000;
-	opacity: .3;
+	line-height: 0;
+	color: black;
 	cursor: pointer;
 	border: none;
 	position: absolute;
+	padding: 0;
+	margin: 0;
   }
   
   button {
@@ -133,7 +134,7 @@ body {
 	border: none;
 	border-radius: 3px;
 	padding: .3rem 1rem;
-	margin-left: .5rem;
+	margin: .5rem;
   }
   
   .button-default {
