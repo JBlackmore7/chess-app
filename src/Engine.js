@@ -350,28 +350,36 @@ function ChessEngine({ game, setGame, boardWidth, boardOrientation, setGameEndMo
       );
     } else if (game.insufficient_material()) {
       //modal for draw... insufficient material
-      <Modal>
-        <div>Draw</div>
-        <p>by insufficient material</p>
-      </Modal>;
+      setGameEndModal(
+        <Modal isShowing={true} hide={() => setGameEndModal(null)}>
+          <div>Draw</div>
+          <p>by insufficient material</p>
+        </Modal>
+      );
     } else if (game.in_threefold_repetition()) {
       //modal for draw... threefold repetition
-      <Modal>
-        <div>Draw</div>
-        <p>by threefold repetition</p>
-      </Modal>;
+      setGameEndModal(
+        <Modal isShowing={true} hide={() => setGameEndModal(null)}>
+          <div>Draw</div>
+          <p>by threefold repetition</p>
+        </Modal>
+      );
     } else if (game.in_stalemate()) {
       //modal for draw... stalemate
-      <Modal>
-        <div>Draw</div>
-        <p>by stalemate</p>
-      </Modal>;
+      setGameEndModal(
+        <Modal isShowing={true} hide={() => setGameEndModal(null)}>
+          <div>Draw</div>
+          <p>by stalemate</p>
+        </Modal>
+      );
     } else if (game.in_draw()) {
       //modal for draw... 50 move rule
-      <Modal>
-        <div>Draw</div>
-        <p>by 50 move rule</p>
-      </Modal>;
+      setGameEndModal(
+        <Modal isShowing={true} hide={() => setGameEndModal(null)}>
+          <div>Draw</div>
+          <p>by 50 move rule</p>
+        </Modal>
+      );
     } else if (game.in_check()) {
       //not sure how this works yet... hopefully red outline around king
       return false;
