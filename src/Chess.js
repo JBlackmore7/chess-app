@@ -1341,7 +1341,7 @@ var Chess = function (fen) {
         if (board[i] == null) {
           row.push(null);
         } else {
-          row.push({ type: board[i].type, color: board[i].color });
+          row.push({ type: board[i].type, color: board[i].color, square: algebraic(i) });
         }
         if ((i + 1) & 0x88) {
           output.push(row);

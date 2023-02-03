@@ -14,7 +14,6 @@ function ChessHome() {
   const { isShowing, toggle } = useModal();
   const [boardOrientation, setBoardOrientation] = useState("white");
   const [gameEndModal, setGameEndModal] = useState(null);
-  console.log(width);
 
   return (
     <div className="main">

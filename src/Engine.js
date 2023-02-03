@@ -339,7 +339,7 @@ function ChessEngine({ game, setGame, boardWidth, boardOrientation, setGameEndMo
   //   return true;
   // }
 
-  function checkStatus() {
+  function checkStatus(color) {
     if (game.in_checkmate()) {
       //modal for gameover... white/black wins
       setGameEndModal(
@@ -380,9 +380,14 @@ function ChessEngine({ game, setGame, boardWidth, boardOrientation, setGameEndMo
           <p>by 50 move rule</p>
         </Modal>
       );
-    } else if (game.in_check()) {
+    } else if (game.in_check(color)) {
       //not sure how this works yet... hopefully red outline around king
-      return false;
+      const findKing = game
+        .board()
+        .flat()
+        .find((piece) => piece?.type === "k" && piece.color === color)?.square;
+      console.log(findKing);
+      document.querySelector(`[data-square="${findKing}"]`).style.border = "thick solid #0000FF";
     } else {
       return false;
     }
@@ -407,6 +412,7 @@ function ChessEngine({ game, setGame, boardWidth, boardOrientation, setGameEndMo
     // Illegal move
     if (move === null) return "snapback";
     const computerColor = boardOrientation === "white" ? "b" : "w";
+    const humanColor = boardOrientation === "white" ? "w" : "b";
     globalSum = evaluateBoard(game, move, globalSum, computerColor);
 
     if (!checkStatus());
@@ -414,7 +420,7 @@ function ChessEngine({ game, setGame, boardWidth, boardOrientation, setGameEndMo
       // Make the best move for black
       window.setTimeout(function () {
         makeBestMove(computerColor);
-        checkStatus();
+        checkStatus(humanColor);
       }, 250);
     }
   }
