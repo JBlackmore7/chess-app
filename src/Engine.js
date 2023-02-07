@@ -381,13 +381,15 @@ function ChessEngine({ game, setGame, boardWidth, boardOrientation, setGameEndMo
         </Modal>
       );
     } else if (game.in_check(color)) {
-      //not sure how this works yet... hopefully red outline around king
+      //grabs the 2D array, flattens it, then finds the king matching the users color
       const findKing = game
         .board()
         .flat()
         .find((piece) => piece?.type === "k" && piece.color === color)?.square;
-      console.log(findKing);
-      document.querySelector(`[data-square="${findKing}"]`).style.border = "thick solid #0000FF";
+      if (findKing.color === color) {
+        document.querySelector(`[data-square="${findKing}"]`).style.background =
+          "radial-gradient(ellipse at center, rgb(255, 0, 0) 0%, rgb(231, 0, 0) 25%, rgba(169, 0, 0, 0) 89%, rgba(158, 0, 0, 0) 100%);";
+      }
     } else {
       return false;
     }
