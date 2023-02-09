@@ -2,10 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./Navbar.module.css";
 
-const linkStyle = {
-  textDecoration: "none",
-};
-
 const Navbar = () => {
   return (
     <div className={styles.navBar}>
