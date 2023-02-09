@@ -1,14 +1,23 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import styles from "./Navbar.module.css";
+
+const linkStyle = {
+  textDecoration: "none",
+};
 
 const Navbar = () => {
   return (
-    <div>
-      <li>
-        <Link to="/">Home</Link>
+    <div className={styles.navBar}>
+      <li className={styles.homeLink}>
+        <Link to="/" style={{ textDecoration: "none" }}>
+          Home
+        </Link>
       </li>
-      <li>
-        <Link to="/contact">Contact</Link>
+      <li className={styles.contactLink}>
+        <Link to="/contact" style={{ textDecoration: "none" }}>
+          Contact
+        </Link>
       </li>
     </div>
   );

@@ -386,10 +386,8 @@ function ChessEngine({ game, setGame, boardWidth, boardOrientation, setGameEndMo
         .board()
         .flat()
         .find((piece) => piece?.type === "k" && piece.color === color)?.square;
-      if (findKing.color === color) {
-        document.querySelector(`[data-square="${findKing}"]`).style.background =
-          "radial-gradient(ellipse at center, rgb(255, 0, 0) 0%, rgb(231, 0, 0) 25%, rgba(169, 0, 0, 0) 89%, rgba(158, 0, 0, 0) 100%);";
-      }
+      const divCheck = document.querySelector(`[data-square="${findKing}"]`).childNodes[0];
+      divCheck.classList.add("inCheck");
     } else {
       return false;
     }
@@ -413,6 +411,7 @@ function ChessEngine({ game, setGame, boardWidth, boardOrientation, setGameEndMo
 
     // Illegal move
     if (move === null) return "snapback";
+    document.getElementsByClassName("inCheck")[0]?.classList.remove("inCheck");
     const computerColor = boardOrientation === "white" ? "b" : "w";
     const humanColor = boardOrientation === "white" ? "w" : "b";
     globalSum = evaluateBoard(game, move, globalSum, computerColor);
