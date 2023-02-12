@@ -7,9 +7,9 @@
 	height: 100vh;
 	background-color: #000;
 	opacity: .5;
-  }
+}
   
-  .modalWrapper {
+.modalWrapper {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -19,25 +19,26 @@
 	overflow-x: hidden;
 	overflow-y: auto;
 	outline: 0;
-  }
+}
   
-  .modal {
+.modal {
 	z-index: 100;
 	background: white;
 	position: relative;
-	margin: 1.70rem auto;
-	border-radius: 3px;
-	max-width: 300px;
-	padding: 1rem;
-  }
+	text-align: center;
+	margin: 80% auto;
+	border-radius: 5px;
+	max-width: 75%;
+	padding: 1.5rem 0.4rem;
+}
   
-  .modalHeader {
+.modalHeader {
 	display: flex;
 	justify-content: flex-end;
 	position: relative;
-  }
+}
   
-  .modalCloseButton {
+.modalCloseButton {
 	font-size: 1.3rem;
 	font-weight: 700;
 	line-height: 0;
@@ -45,20 +46,7 @@
 	cursor: pointer;
 	border: none;
 	position: absolute;
+	top: -11px;
 	padding: 0;
 	margin: 0;
-  }
-  
-  /* button {
-	font-size: .9rem;
-	font-weight: 700;
-	border: none;
-	border-radius: 3px;
-	padding: .3rem 1rem;
-	margin: .5rem;
-  }
-  
-  .buttonDefault {
-	background: #247BA0;
-	color: #fff;
-  } */
+}
