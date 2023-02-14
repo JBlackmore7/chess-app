@@ -5,9 +5,8 @@ import ChessEngine from "../Engine";
 import { useSize } from "./hooks";
 import { useModal } from "./hooks";
 import Modal from "./Modal";
-import NewGame from "./NewGame";
 
-function ChessHome() {
+function NewGame() {
   const [game, setGame] = useState(new Chess());
   const [showGame, setShowGame] = useState(false);
   const containerRef = useRef();
@@ -69,4 +68,4 @@ function ChessHome() {
   );
 }
 
-export default ChessHome;
+export default NewGame;
