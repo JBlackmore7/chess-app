@@ -4,13 +4,12 @@ import Modal from "./components/Modal";
 
 function ChessEngine({ game, setGame, boardWidth, boardOrientation, setGameEndModal }) {
   var board = null;
-  // var game = new Chess();
   var globalSum = 0; // always from black's perspective. Negative for white's perspective.
-  var whiteSquareGrey = "#a9a9a9";
-  var blackSquareGrey = "#696969";
-  var squareClass = "square-55d63";
-  var squareToHighlight = null;
-  var colorToHighlight = null;
+  // var whiteSquareGrey = "#a9a9a9";
+  // var blackSquareGrey = "#696969";
+  // var squareClass = "square-55d63";
+  // var squareToHighlight = null;
+  // var colorToHighlight = null;
   var positionCount;
 
   var config = {
