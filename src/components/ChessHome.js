@@ -14,17 +14,18 @@ function ChessHome() {
   // const { undo } = takeback();
   const { width } = useSize(containerRef);
   const { isShowing, toggle } = useModal();
-  const [boardOrientation, setBoardOrientation] = useState("white");
+  const [boardOrientation, setBoardOrientation] = useState();
   const [gameEndModal, setGameEndModal] = useState(null);
 
   function takeBack() {
     const gameCopy = { ...game };
     gameCopy.undo();
+    gameCopy.undo();
     setGame(gameCopy);
   }
 
   return (
-    <div className={!showGame ? styles.mainEnd : styles.mainCenter}>
+    <div ref={containerRef} className={!showGame ? styles.mainEnd : styles.mainCenter}>
       {!showGame ? (
         <button
           className="myButton"
@@ -64,9 +65,9 @@ function ChessHome() {
         </button>
       </Modal>
       {gameEndModal}
-      {showGame ? (
+      {showGame && boardOrientation ? (
         <>
-          <div ref={containerRef} className="board">
+          <div className="board">
             <ChessEngine
               boardWidth={width}
               game={game}
@@ -75,11 +76,11 @@ function ChessHome() {
               setGameEndModal={setGameEndModal}
             />
           </div>
-          <button className="undo" onClick={takeBack}>
-            Undo
-          </button>
           <button className="newGame" onClick={toggle}>
             New Game
+          </button>
+          <button className="undo" onClick={takeBack}>
+            Undo
           </button>
         </>
       ) : null}

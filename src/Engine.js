@@ -1,6 +1,8 @@
 import { Chessboard } from "react-chessboard";
 import { useEffect } from "react";
 import Modal from "./components/Modal";
+import useSound from "use-sound";
+import lightswitch from "./images/lightswitch.mp3";
 
 function ChessEngine({ game, setGame, boardWidth, boardOrientation, setGameEndModal }) {
   var board = null;
@@ -11,6 +13,8 @@ function ChessEngine({ game, setGame, boardWidth, boardOrientation, setGameEndMo
   // var squareToHighlight = null;
   // var colorToHighlight = null;
   var positionCount;
+
+  const [play] = useSound(lightswitch);
 
   var config = {
     draggable: true,
@@ -410,16 +414,19 @@ function ChessEngine({ game, setGame, boardWidth, boardOrientation, setGameEndMo
 
     // Illegal move
     if (move === null) return "snapback";
+    play();
     document.getElementsByClassName("inCheck")[0]?.classList.remove("inCheck");
     const computerColor = boardOrientation === "white" ? "b" : "w";
     const humanColor = boardOrientation === "white" ? "w" : "b";
     globalSum = evaluateBoard(game, move, globalSum, computerColor);
 
-    if (!checkStatus());
+    if (!checkStatus(computerColor));
     {
       // Make the best move for black
       window.setTimeout(function () {
         makeBestMove(computerColor);
+        play();
+        document.getElementsByClassName("inCheck")[0]?.classList.remove("inCheck");
         checkStatus(humanColor);
       }, 250);
     }

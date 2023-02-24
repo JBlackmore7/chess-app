@@ -1,6 +1,7 @@
 .mainCenter {
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
+	flex-wrap: wrap;
 	width: 100%;
     justify-content: center;
 	align-items: center;
@@ -8,9 +9,10 @@
 
 .mainEnd {
 	display: flex;
-	flex-direction: column;
-	flex-basis: 80%;
+	flex-direction: row;
+	flex-wrap: wrap;
+	flex-basis: 100%;
 	width: 100%;
-	justify-content: flex-end;
+	justify-content: center;
 	align-items: center;
 }
