@@ -2,7 +2,6 @@ import { useCallback, useState, useLayoutEffect } from "react";
 
 export const useSize = (ref) => {
   const [componentSize, setComponentSize] = useState(getSize(ref ? ref.current : {}));
-
   const handleResize = useCallback(() => {
     if (ref.current) {
       setComponentSize(getSize(ref.current));

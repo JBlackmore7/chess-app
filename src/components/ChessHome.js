@@ -11,7 +11,6 @@ function ChessHome() {
   const [game, setGame] = useState(new Chess());
   const [showGame, setShowGame] = useState(false);
   const containerRef = useRef();
-  // const { undo } = takeback();
   const { width } = useSize(containerRef);
   const { isShowing, toggle } = useModal();
   const [boardOrientation, setBoardOrientation] = useState();
@@ -69,19 +68,21 @@ function ChessHome() {
         <>
           <div className="board">
             <ChessEngine
-              boardWidth={width}
+              boardWidth={Math.min(780, width)}
               game={game}
               setGame={setGame}
               boardOrientation={boardOrientation}
               setGameEndModal={setGameEndModal}
             />
           </div>
-          <button className="newGame" onClick={toggle}>
-            New Game
-          </button>
-          <button className="undo" onClick={takeBack}>
-            Undo
-          </button>
+          <div className="buttonWrapper">
+            <button className="newGame" onClick={toggle}>
+              New Game
+            </button>
+            <button className="undo" onClick={takeBack}>
+              Undo Last Move
+            </button>
+          </div>
         </>
       ) : null}
     </div>

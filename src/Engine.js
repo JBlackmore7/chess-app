@@ -2,28 +2,16 @@ import { Chessboard } from "react-chessboard";
 import { useEffect } from "react";
 import Modal from "./components/Modal";
 import useSound from "use-sound";
-import lightswitch from "./images/lightswitch.mp3";
+import move from "./images/play.mp3";
+import capture from "./images/take.mp3";
+import message from "./images/notify.mp3";
 
 function ChessEngine({ game, setGame, boardWidth, boardOrientation, setGameEndModal }) {
-  var board = null;
   var globalSum = 0; // always from black's perspective. Negative for white's perspective.
-  // var whiteSquareGrey = "#a9a9a9";
-  // var blackSquareGrey = "#696969";
-  // var squareClass = "square-55d63";
-  // var squareToHighlight = null;
-  // var colorToHighlight = null;
   var positionCount;
-
-  const [play] = useSound(lightswitch);
-
-  var config = {
-    draggable: true,
-    position: "start",
-    onDragStart: onDragStart,
-    onDrop: onDrop,
-  };
-
-  var timer = null;
+  const [play] = useSound(move);
+  const [take] = useSound(capture);
+  const [notify] = useSound(message);
 
   var weights = { p: 100, n: 280, b: 320, r: 479, q: 929, k: 60000, k_e: 60000 };
   var pst_w = {
@@ -283,7 +271,6 @@ function ChessEngine({ game, setGame, boardWidth, boardOrientation, setGameEndMo
       var depth = 3;
     }
 
-    var d = new Date().getTime();
     var [bestMove, bestMoveValue] = minimax(
       game,
       depth,
@@ -293,13 +280,6 @@ function ChessEngine({ game, setGame, boardWidth, boardOrientation, setGameEndMo
       currSum,
       color
     );
-    var d2 = new Date().getTime();
-    var moveTime = d2 - d;
-    var positionsPerS = (positionCount * 1000) / moveTime;
-
-    // $('#position-count').text(positionCount);
-    // $('#time').text(moveTime / 1000);
-    // $('#positions-per-s').text(Math.round(positionsPerS));
 
     return [bestMove, bestMoveValue];
   }
@@ -318,33 +298,19 @@ function ChessEngine({ game, setGame, boardWidth, boardOrientation, setGameEndMo
 
     const gameCopy = { ...game };
     gameCopy.move(move);
+    if (move.flags.includes("c")) {
+      take();
+    } else {
+      play();
+    }
     setGame(gameCopy);
     // board.position(gameCopy.fen());
   }
 
-  function onDragStart(source, piece) {
-    // do not pick up pieces if the game is over
-    if (game.game_over()) return false;
-
-    // or if it's not that side's turn
-    if ((game.turn() === "w" && piece.search(/^b/) !== -1) || (game.turn() === "b" && piece.search(/^w/) !== -1)) {
-      return false;
-    }
-  }
-
-  // function checkStatus() {
-  //   if (game.in_checkmate()) {
-  //   } else if (game.in_check()) {
-  //     return false;
-  //   } else {
-  //     return false;
-  //   }
-  //   return true;
-  // }
-
   function checkStatus(color) {
     if (game.in_checkmate()) {
       //modal for gameover... white/black wins
+      notify();
       setGameEndModal(
         <Modal isShowing={true} hide={() => setGameEndModal(null)}>
           <div>Game Over</div>
@@ -353,6 +319,7 @@ function ChessEngine({ game, setGame, boardWidth, boardOrientation, setGameEndMo
       );
     } else if (game.insufficient_material()) {
       //modal for draw... insufficient material
+      notify();
       setGameEndModal(
         <Modal isShowing={true} hide={() => setGameEndModal(null)}>
           <div>Draw</div>
@@ -361,6 +328,7 @@ function ChessEngine({ game, setGame, boardWidth, boardOrientation, setGameEndMo
       );
     } else if (game.in_threefold_repetition()) {
       //modal for draw... threefold repetition
+      notify();
       setGameEndModal(
         <Modal isShowing={true} hide={() => setGameEndModal(null)}>
           <div>Draw</div>
@@ -369,6 +337,7 @@ function ChessEngine({ game, setGame, boardWidth, boardOrientation, setGameEndMo
       );
     } else if (game.in_stalemate()) {
       //modal for draw... stalemate
+      notify();
       setGameEndModal(
         <Modal isShowing={true} hide={() => setGameEndModal(null)}>
           <div>Draw</div>
@@ -377,6 +346,7 @@ function ChessEngine({ game, setGame, boardWidth, boardOrientation, setGameEndMo
       );
     } else if (game.in_draw()) {
       //modal for draw... 50 move rule
+      notify();
       setGameEndModal(
         <Modal isShowing={true} hide={() => setGameEndModal(null)}>
           <div>Draw</div>
@@ -401,6 +371,7 @@ function ChessEngine({ game, setGame, boardWidth, boardOrientation, setGameEndMo
     const gameCopy = { ...game };
     const result = gameCopy.move(move);
     setGame(gameCopy);
+
     return result; // null if the move was illegal, the move object if the move was legal
   }
 
@@ -414,18 +385,26 @@ function ChessEngine({ game, setGame, boardWidth, boardOrientation, setGameEndMo
 
     // Illegal move
     if (move === null) return "snapback";
-    play();
+    // play();
+
+    if (move.flags.includes("c")) {
+      take();
+    } else {
+      play();
+    }
+
     document.getElementsByClassName("inCheck")[0]?.classList.remove("inCheck");
     const computerColor = boardOrientation === "white" ? "b" : "w";
     const humanColor = boardOrientation === "white" ? "w" : "b";
     globalSum = evaluateBoard(game, move, globalSum, computerColor);
 
     if (!checkStatus(computerColor));
+    // eslint-disable-next-line no-lone-blocks
     {
-      // Make the best move for black
+      // Make the best move for AI
       window.setTimeout(function () {
         makeBestMove(computerColor);
-        play();
+        // play();
         document.getElementsByClassName("inCheck")[0]?.classList.remove("inCheck");
         checkStatus(humanColor);
       }, 250);
