@@ -1,70 +1,29 @@
-# Getting Started with Create React App
+# Chess
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- Work Flow is a work order web application that lets users create work orders, update them with new information, and view the completed order.
+- Live demo [_here_](https://jblackmore7.github.io/).
 
-## Available Scripts
+## Inspiration
 
-In the project directory, you can run:
+- This project was inspired by an old paper work order system that was used at a previous employer. They had to be written by hand which made it difficult to read some employees hand writing, the actual order itself changed hands multiple times which resulted in missing orders and confusion, there was only finite space on the paper work order which sometimes led to multiple orders being used for the same job. I could honestly go on for a while about the downsides of paper work orders -- suffice it to say I was very passionate about digitizing this process.
 
-### `npm start`
+## Technologies Used
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- ReactJS
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Features
 
-### `npm test`
+- Work Flow was originally set up using a fake rest API that handled all of the data on localhost, but I decided to use localStorage instead to highlight my application. The old fetch requests and response handling are commented out in my source code if you want to check them out.
+- I have starter data hard coded into the project but all work orders that you create and manipulate will remain on the application until you clear your browsing data/cookies and website data.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Room for Improvement
 
-### `npm run build`
+- Refactoring -- multiple JS files/functions that could be condensed and too much hard coded HTML.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+To do:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- The ability to edit a work order in any state
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Acknowledgements
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Many thanks to @samwise-nl for guiding me through this process and giving me tons of ideas and best practice methods!
