@@ -12,6 +12,9 @@
 }
   
 .modalWrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -26,12 +29,12 @@
 .modal {
 	z-index: 100;
 	background: #e2af43;
+	min-width: 8rem;
 	position: relative;
 	text-align: center;
-	margin: 80% auto;
+	border: 2px solid #000;
 	border-radius: 5px;
-	max-width: 75%;
-	padding: 1.5rem 0.4rem;
+	padding: 1.5rem 1.5rem;
 }
   
 .modalHeader {
@@ -49,6 +52,7 @@
 	border: none;
 	position: absolute;
 	top: -11px;
+	right: -20px;
 	padding: 0;
 	margin: 0;
 }
@@ -68,6 +72,8 @@
 	  
 	.modalWrapper {
 		display: flex;
+		justify-content: center;
+		align-items: center;
 		position: fixed;
 		top: 0;
 		left: 0;
@@ -82,13 +88,12 @@
 	.modal {
 		z-index: 100;
 		background: #e2af43;
+		min-width: 8rem;
 		position: relative;
 		text-align: center;
-		font-size: larger;
-		margin: auto;
+		border: 2px solid #000;
 		border-radius: 5px;
-		max-width: 55%;
-		padding: 1.7rem 1.7rem;
+		padding: 1.5rem 1.5rem;
 	}
 	  
 	.modalHeader {
@@ -98,7 +103,7 @@
 	}
 	  
 	.modalCloseButton {
-		font-size: 1.8rem;
+		font-size: 1.3rem;
 		font-weight: 700;
 		line-height: 0;
 		color: black;

@@ -313,8 +313,7 @@ function ChessEngine({ game, setGame, boardWidth, boardOrientation, setGameEndMo
       notify();
       setGameEndModal(
         <Modal isShowing={true} hide={() => setGameEndModal(null)}>
-          <div>Game Over</div>
-          <p>by checkmate</p>
+          <div>Game Over | Checkmate</div>
         </Modal>
       );
     } else if (game.insufficient_material()) {
@@ -322,8 +321,7 @@ function ChessEngine({ game, setGame, boardWidth, boardOrientation, setGameEndMo
       notify();
       setGameEndModal(
         <Modal isShowing={true} hide={() => setGameEndModal(null)}>
-          <div>Draw</div>
-          <p>by insufficient material</p>
+          <div>Draw Via Insufficient Material</div>
         </Modal>
       );
     } else if (game.in_threefold_repetition()) {
@@ -331,8 +329,7 @@ function ChessEngine({ game, setGame, boardWidth, boardOrientation, setGameEndMo
       notify();
       setGameEndModal(
         <Modal isShowing={true} hide={() => setGameEndModal(null)}>
-          <div>Draw</div>
-          <p>by threefold repetition</p>
+          <div>Draw Via Threefold Repetition</div>
         </Modal>
       );
     } else if (game.in_stalemate()) {
@@ -340,8 +337,7 @@ function ChessEngine({ game, setGame, boardWidth, boardOrientation, setGameEndMo
       notify();
       setGameEndModal(
         <Modal isShowing={true} hide={() => setGameEndModal(null)}>
-          <div>Draw</div>
-          <p>by stalemate</p>
+          <div>Draw Via Stalemate</div>
         </Modal>
       );
     } else if (game.in_draw()) {
@@ -349,8 +345,7 @@ function ChessEngine({ game, setGame, boardWidth, boardOrientation, setGameEndMo
       notify();
       setGameEndModal(
         <Modal isShowing={true} hide={() => setGameEndModal(null)}>
-          <div>Draw</div>
-          <p>by 50 move rule</p>
+          <div>Draw Via 50-Move Rule</div>
         </Modal>
       );
     } else if (game.in_check(color)) {
