@@ -24,7 +24,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  *----------------------------------------------------------------------------*/
-var Chess = function (fen) {
+function Chess(fen) {
   var BLACK = "b";
   var WHITE = "w";
 
@@ -1829,7 +1829,7 @@ var Chess = function (fen) {
       });
     },
   };
-};
+}
 
 export default Chess;
 /* export Chess object if using node or any other CommonJS compatible
