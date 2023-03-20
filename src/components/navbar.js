@@ -6,7 +6,7 @@ const Navbar = () => {
   return (
     <div className={styles.navBar}>
       <li className={styles.homeLink}>
-        <Link to="/" style={{ textDecoration: "none" }}>
+        <Link to="https://jblackmore7.github.io/chess-app/" style={{ textDecoration: "none" }}>
           Home
         </Link>
       </li>
