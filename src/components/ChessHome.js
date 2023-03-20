@@ -1,7 +1,7 @@
 import "../App.css";
 import styles from "./ChessHome.module.css";
 import { useState, useRef } from "react";
-import { Chess } from "../Chess";
+import * as Chess from "../Chess";
 import ChessEngine from "../Engine";
 import { useSize } from "./hooks";
 import { useModal } from "./hooks";
