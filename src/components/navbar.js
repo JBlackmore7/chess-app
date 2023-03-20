@@ -6,12 +6,12 @@ const Navbar = () => {
   return (
     <div className={styles.navBar}>
       <li className={styles.homeLink}>
-        <Link to="/chess-app" style={{ textDecoration: "none" }}>
+        <Link to="/" style={{ textDecoration: "none" }}>
           Home
         </Link>
       </li>
       <li className={styles.contactLink}>
-        <Link to="/chess-app/contact" style={{ textDecoration: "none" }}>
+        <Link to="/contact" style={{ textDecoration: "none" }}>
           Contact
         </Link>
       </li>
