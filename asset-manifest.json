@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/chess-app/static/css/main.c4faa9af.css",
-    "main.js": "/chess-app/static/js/main.b5d2f753.js",
+    "main.js": "/chess-app/static/js/main.0f783e5a.js",
     "static/js/845.0a6960b8.chunk.js": "/chess-app/static/js/845.0a6960b8.chunk.js",
     "static/media/6172384.jpg": "/chess-app/static/media/6172384.b79c66d1a3d0688a3f5d.jpg",
     "static/media/white-king.png": "/chess-app/static/media/white-king.026b5b8ff047fd3c790f.png",
@@ -11,11 +11,11 @@
     "static/media/play.mp3": "/chess-app/static/media/play.f4280e96965e14433c3b.mp3",
     "index.html": "/chess-app/index.html",
     "main.c4faa9af.css.map": "/chess-app/static/css/main.c4faa9af.css.map",
-    "main.b5d2f753.js.map": "/chess-app/static/js/main.b5d2f753.js.map",
+    "main.0f783e5a.js.map": "/chess-app/static/js/main.0f783e5a.js.map",
     "845.0a6960b8.chunk.js.map": "/chess-app/static/js/845.0a6960b8.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.c4faa9af.css",
-    "static/js/main.b5d2f753.js"
+    "static/js/main.0f783e5a.js"
   ]
 }
