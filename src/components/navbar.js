@@ -11,7 +11,7 @@ const Navbar = () => {
         </Link>
       </li>
       <li className={styles.contactLink}>
-        <Link to="/contact" style={{ textDecoration: "none" }}>
+        <Link to="https://jblackmore7.github.io/chess-app/contact" style={{ textDecoration: "none" }}>
           Contact
         </Link>
       </li>

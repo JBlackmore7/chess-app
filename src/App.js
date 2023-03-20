@@ -9,7 +9,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="https://jblackmore7.github.io/chess-app/" element={<ChessHome />} />
-        <Route path="/contact" element={<div>Contact </div>} />
+        <Route path="https://jblackmore7.github.io/chess-app/contact" element={<div>Contact </div>} />
       </Routes>
     </Router>
   );
