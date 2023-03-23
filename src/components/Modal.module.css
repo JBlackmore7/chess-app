@@ -1,3 +1,4 @@
+@import 'https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300';
 /* X-Small devices (portrait phones, less than 576px) */
 @media (max-width: 575px) {
 .modalOverlay {
@@ -28,12 +29,16 @@
   
 .modal {
 	z-index: 100;
-	background: #e2af43;
+	background-color: #0e121d;
+	border: 0.1px solid rgba(255,255,255,0.5);
+	color: white;
+	font-family: "Open Sans Condensed", sans-serif;
+	font-size: larger;
+	letter-spacing: 1px;
 	min-width: 8rem;
 	position: relative;
 	text-align: center;
-	border: 2px solid #000;
-	border-radius: 5px;
+	border-radius: .2rem;
 	padding: 1.5rem 1.5rem;
 }
   
@@ -45,14 +50,13 @@
   
 .modalCloseButton {
 	font-size: 1.3rem;
-	font-weight: 700;
 	line-height: 0;
-	color: black;
+	color: #e2af43;
 	cursor: pointer;
 	border: none;
 	position: absolute;
 	top: -11px;
-	right: -20px;
+	right: -19px;
 	padding: 0;
 	margin: 0;
 }

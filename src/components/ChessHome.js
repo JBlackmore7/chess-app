@@ -26,14 +26,16 @@ function ChessHome() {
   return (
     <div ref={containerRef} className={!showGame ? styles.mainEnd : styles.mainCenter}>
       {!showGame ? (
-        <button
-          className="myButton"
-          onClick={() => {
-            toggle();
-          }}
-        >
-          New Game
-        </button>
+        <div className="wrap">
+          <button
+            className="MyButton"
+            onClick={() => {
+              toggle();
+            }}
+          >
+            New Game
+          </button>
+        </div>
       ) : null}
       <Modal isShowing={isShowing} hide={toggle}>
         <button

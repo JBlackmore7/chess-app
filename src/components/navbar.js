@@ -11,8 +11,8 @@ const Navbar = () => {
         </Link>
       </li>
       <li className={styles.contactLink}>
-        <Link to="/contact" style={{ textDecoration: "none" }}>
-          Contact
+        <Link to="/login" style={{ textDecoration: "none" }}>
+          Log In
         </Link>
       </li>
     </div>
