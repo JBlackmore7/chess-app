@@ -1,4 +1,5 @@
 import { Chessboard } from "react-chessboard";
+import { useState } from "react";
 import { useEffect } from "react";
 import Modal from "./components/Modal";
 import useSound from "use-sound";
@@ -9,6 +10,10 @@ import message from "./images/notify.mp3";
 function ChessEngine({ game, setGame, boardWidth, boardOrientation, setGameEndModal }) {
   var globalSum = 0; // always from black's perspective. Negative for white's perspective.
   var positionCount;
+  const [moveFrom, setMoveFrom] = useState("");
+  const [rightClickedSquares, setRightClickedSquares] = useState({});
+  const [moveSquares, setMoveSquares] = useState({});
+  const [optionSquares, setOptionSquares] = useState({});
   const [play] = useSound(move);
   const [take] = useSound(capture);
   const [notify] = useSound(message);
@@ -284,9 +289,7 @@ function ChessEngine({ game, setGame, boardWidth, boardOrientation, setGameEndMo
     return [bestMove, bestMoveValue];
   }
 
-  /*
-   * Makes the best legal move for the given color.
-   */
+  // Makes the best legal move for the given color.
   function makeBestMove(color) {
     if (color === "b") {
       var move = getBestMove(game, color, globalSum)[0];
@@ -304,7 +307,6 @@ function ChessEngine({ game, setGame, boardWidth, boardOrientation, setGameEndMo
       play();
     }
     setGame(gameCopy);
-    // board.position(gameCopy.fen());
   }
 
   function checkStatus(color) {
@@ -362,25 +364,61 @@ function ChessEngine({ game, setGame, boardWidth, boardOrientation, setGameEndMo
     return true;
   }
 
-  function makeAMove(move) {
-    const gameCopy = { ...game };
-    const result = gameCopy.move(move);
-    setGame(gameCopy);
+  function getMoveOptions(square) {
+    const moves = game.moves({
+      square,
+      verbose: true,
+    });
+    if (moves.length === 0) {
+      return false;
+    }
 
-    return result; // null if the move was illegal, the move object if the move was legal
+    const newSquares = {};
+    moves.map((move) => {
+      newSquares[move.to] = {
+        background:
+          game.get(move.to) && game.get(move.to).color !== game.get(square).color
+            ? "radial-gradient(circle, rgba(0,0,0,.1) 85%, transparent 85%)"
+            : "radial-gradient(circle, rgba(0,0,0,.1) 25%, transparent 25%)",
+        borderRadius: "50%",
+      };
+      return move;
+    });
+    newSquares[square] = {
+      background: "rgba(255, 255, 0, 0.4)",
+    };
+    setOptionSquares(newSquares);
+    return true;
   }
 
-  function onDrop(source, target) {
-    // see if the move is legal
-    var move = makeAMove({
-      from: source,
-      to: target,
-      promotion: "q", // NOTE: always promote to a queen for example simplicity
-    });
+  function onSquareClick(square) {
+    setRightClickedSquares({});
 
-    // Illegal move
-    if (move === null) return "snapback";
-    // play();
+    function resetFirstMove(square) {
+      const hasOptions = getMoveOptions(square);
+      if (hasOptions) setMoveFrom(square);
+    }
+
+    // from square
+    if (!moveFrom) {
+      resetFirstMove(square);
+      return;
+    }
+
+    // attempt to make move
+    const gameCopy = { ...game };
+    const move = gameCopy.move({
+      from: moveFrom,
+      to: square,
+      promotion: "q", // always promote to a queen for example simplicity
+    });
+    setGame(gameCopy);
+
+    // if invalid, setMoveFrom and getMoveOptions
+    if (move === null) {
+      resetFirstMove(square);
+      return;
+    }
 
     if (move.flags.includes("c")) {
       take();
@@ -404,7 +442,64 @@ function ChessEngine({ game, setGame, boardWidth, boardOrientation, setGameEndMo
         checkStatus(humanColor);
       }, 250);
     }
+    setMoveFrom("");
+    setOptionSquares({});
   }
+
+  function onSquareRightClick(square) {
+    const colour = "rgba(0, 0, 255, 0.4)";
+    setRightClickedSquares({
+      ...rightClickedSquares,
+      [square]:
+        rightClickedSquares[square] && rightClickedSquares[square].backgroundColor === colour
+          ? undefined
+          : { backgroundColor: colour },
+    });
+  }
+
+  // function makeAMove(move) {
+  //   const gameCopy = { ...game };
+  //   const result = gameCopy.move(move);
+  //   setGame(gameCopy);
+
+  //   return result; // null if the move was illegal, the move object if the move was legal
+  // }
+
+  // function onDrop(source, target) {
+  //   // see if the move is legal
+  //   var move = makeAMove({
+  //     from: source,
+  //     to: target,
+  //     promotion: "q", // NOTE: always promote to a queen for example simplicity
+  //   });
+
+  //   // Illegal move
+  //   if (move === null) return "snapback";
+  //   // play();
+
+  //   if (move.flags.includes("c")) {
+  //     take();
+  //   } else {
+  //     play();
+  //   }
+
+  //   document.getElementsByClassName("inCheck")[0]?.classList.remove("inCheck");
+  //   const computerColor = boardOrientation === "white" ? "b" : "w";
+  //   const humanColor = boardOrientation === "white" ? "w" : "b";
+  //   globalSum = evaluateBoard(game, move, globalSum, computerColor);
+
+  //   if (!checkStatus(computerColor));
+  //   // eslint-disable-next-line no-lone-blocks
+  //   {
+  //     // Make the best move for AI
+  //     window.setTimeout(function () {
+  //       makeBestMove(computerColor);
+  //       // play();
+  //       document.getElementsByClassName("inCheck")[0]?.classList.remove("inCheck");
+  //       checkStatus(humanColor);
+  //     }, 250);
+  //   }
+  // }
 
   useEffect(() => {
     if (boardOrientation === "black") {
@@ -417,8 +512,22 @@ function ChessEngine({ game, setGame, boardWidth, boardOrientation, setGameEndMo
   console.log(game.pgn());
   return (
     <Chessboard
+      id="ClickToMove"
+      animationDuration={200}
+      arePiecesDraggable={false}
       position={game.fen()}
-      onPieceDrop={onDrop}
+      onSquareClick={onSquareClick}
+      onSquareRightClick={onSquareRightClick}
+      customBoardStyle={{
+        borderRadius: "4px",
+        boxShadow: "0 2px 10px rgba(0, 0, 0, 0.5)",
+      }}
+      customSquareStyles={{
+        ...moveSquares,
+        ...optionSquares,
+        ...rightClickedSquares,
+      }}
+      // onPieceDrop={onDrop}
       boardWidth={boardWidth}
       boardOrientation={boardOrientation}
     />
