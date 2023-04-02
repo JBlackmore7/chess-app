@@ -1,7 +1,7 @@
 # Chess
 
-- Work Flow is a work order web application that lets users create work orders, update them with new information, and view the completed order.
-- Live demo [_here_](https://jblackmore7.github.io/).
+- I made a simple chess app using ReactJS
+- Live demo [_here_](https://jblackmore7.github.io/chess-app).
 
 ## Inspiration
 
