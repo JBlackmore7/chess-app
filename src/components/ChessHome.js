@@ -70,7 +70,7 @@ function ChessHome() {
         <>
           <div className="board">
             <ChessEngine
-              boardWidth={Math.min(780, width)}
+              boardWidth={Math.min(630, width)}
               game={game}
               setGame={setGame}
               boardOrientation={boardOrientation}

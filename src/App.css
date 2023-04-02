@@ -29,7 +29,6 @@ body {
 	flex-direction: column;
 	justify-content: flex-end;
 	align-items: center;
-  }
 }
 
 .MyButton {
@@ -45,9 +44,9 @@ body {
 	cursor: pointer;
 	background-color: transparent;
 	font-family: "Open Sans Condensed", sans-serif;
-  }
+}
 
-  .MyButton::before {
+.MyButton::before {
 	content: '';
 	position: absolute;
 	bottom: 0;
@@ -64,15 +63,18 @@ body {
 	border-top-color: #e2af43;
 	border-bottom-color: #e2af43;
 	transform: scale(0.1, 1);
-  }
-  .MyButton:hover {
+}
+
+.MyButton:hover {
 	letter-spacing: 2px;
-  }
-  .MyButton:hover::before {
+}
+
+.MyButton:hover::before {
 	opacity: 1; 
 	transform: scale(1, 1); 
-  }
-  .MyButton::after {
+}
+
+.MyButton::after {
 	content: '';
 	position: absolute;
 	bottom: 0;
@@ -82,11 +84,12 @@ body {
 	z-index: 1;
 	transition: all 0.3s;
 	background-color: rgba(255,255,255,0.1);
-  }
-  .MyButton:hover::after {
+}
+
+.MyButton:hover::after {
 	opacity: 0; 
 	transform: scale(0.1, 1);
-  }
+}
 
 .playAsWhite img, .playAsBlack img {
 	max-width: 100px;
@@ -118,8 +121,6 @@ body {
 	border: 0.1px solid #e2af43
 }
 
-
-
 .playAsBlack {
 	margin-left: 13px;
 	font-family: "Open Sans Condensed", sans-serif;
@@ -136,7 +137,7 @@ body {
 	display: flex;
 	width: 100%;
 	justify-content: space-between;
-	max-width: 780px;
+	max-width: 630px;
 }
 
 .undo, .newGame {
@@ -156,6 +157,7 @@ body {
 .undo:hover, .newGame:hover {
 	text-decoration: none;
     color:#e2af43;
+}
 }
 
 /* Small devices (landscape phones, 576px and up) */
@@ -189,7 +191,6 @@ body {
 		justify-content: flex-end;
 		align-items: center;
 	  }
-	}
 	
 	.MyButton {
 		color: #FFF;
@@ -277,8 +278,6 @@ body {
 		border: 0.1px solid #e2af43
 	}
 	
-	
-	
 	.playAsBlack {
 		margin-left: 13px;
 		font-family: "Open Sans Condensed", sans-serif;
@@ -295,6 +294,8 @@ body {
 		display: flex;
 		width: 100%;
 		justify-content: space-between;
+		max-width: 630px;
+		margin-bottom: 1rem;
 	}
 	
 	.undo, .newGame {
@@ -315,7 +316,7 @@ body {
 		text-decoration: none;
 		color:#e2af43;
 	}
-
+}
 /* Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
 
