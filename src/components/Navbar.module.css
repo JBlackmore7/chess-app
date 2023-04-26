@@ -10,26 +10,44 @@
     margin-bottom: 1rem;
 }
 
-.homeLink, .contactLink {
+.homeLink {
     list-style-type: none;
 	font-family: "Open Sans Condensed", sans-serif;
     padding-left: 0.5rem;
 }
 
-.homeLink a, .contactLink a {
+.homeLink a {
     color: white;
     letter-spacing: 1px;
     font-size: large;
 }
 
-.homeLink:link, .homeLink a:hover, .homeLink:focus, .homeLink:visited, .contactLink:link, .contactLink a:hover, .contactLink:focus, .contactLink:visited {
+.contactLink button {
+    color: white;
+    letter-spacing: 1px;
+    font-size: large;
+    font-family: "Open Sans Condensed", sans-serif;
+    background-color: rgba(0,0,0,0);
+    border-color: rgb(0, 0, 238);
+    border-style: none;
+    box-sizing: content-box;
+    cursor: pointer;
+    display: inline;
+    padding: 0;
+    perspective-origin: 0 0;
+    text-align: start;
+    text-decoration: none;
+    transform-origin: 0 0;
+    width: auto;
+}
+
+.homeLink:link, .homeLink a:hover, .homeLink:focus, .homeLink:visited, .contactLink button:link, .contactLink button:hover, .contactLink button:focus, .contactLink button:visited {
     text-decoration: none;
     color:#e2af43;
 }
 
 .contactLink {
     list-style-type: none;
-	font-family: "Open Sans Condensed", sans-serif;
     padding-right: 0.5rem;
 }
 
