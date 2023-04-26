@@ -17,8 +17,19 @@ const chessProfile = {
 app.use(cors());
 app.use(express.json());
 
-app.get("/message", (req, res) => {
-  res.json({ message: chessProfile });
+app.get("/profiles", (req, res) => {
+  res.json({ profiles: chessProfile });
+});
+
+app.post("/profiles", (req, res) => {
+  chessProfile.query(`INSERT INTO users (user) VALUES ("${req.body.text}")`, function (err, result) {
+    if (err) {
+      console.log("error inserting into database", err.sqlMessage);
+    } else {
+      console.log("successful insertion into database", result);
+    }
+  });
+  res.sendStatus(201);
 });
 
 app.listen(8000, () => {
