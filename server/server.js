@@ -13,23 +13,25 @@ const chessProfile = {
   username: "Jar",
   email: "555@fake.com",
 };
+const profiles = [chessProfile];
 
 app.use(cors());
 app.use(express.json());
 
-app.get("/profiles", (req, res) => {
-  res.json({ profiles: chessProfile });
+app.get("/profiles", (request, response) => {
+  console.log("here2", response.body);
+  response.json(profiles);
 });
 
-app.post("/profiles", (req, res) => {
-  chessProfile.query(`INSERT INTO users (user) VALUES ("${req.body.text}")`, function (err, result) {
-    if (err) {
-      console.log("error inserting into database", err.sqlMessage);
-    } else {
-      console.log("successful insertion into database", result);
-    }
+app.post("/profiles", (request, response) => {
+  console.log("here1", request.body);
+  profiles.push({
+    name: request.body.name,
+    difficulyLevel: request.body.difficulty,
+    username: request.body.username,
+    email: request.body.email,
   });
-  res.sendStatus(201);
+  // response.json({ profiles: chessProfile });
 });
 
 app.listen(8000, () => {
