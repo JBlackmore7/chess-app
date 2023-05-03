@@ -5,7 +5,7 @@ import * as Yup from "yup";
 const SignupForm = () => {
   return (
     <Formik
-      initialValues={{ firstName: "", lastName: "", email: "" }}
+      initialValues={{ firstName: "", lastName: "", email: "", difficulty: "" }}
       validationSchema={Yup.object({
         firstName: Yup.string().max(15, "Must be 15 characters or less").required("Required"),
         lastName: Yup.string().max(20, "Must be 20 characters or less").required("Required"),
@@ -14,7 +14,15 @@ const SignupForm = () => {
       })}
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
+          const userData = JSON.stringify(values, null, 2);
+          const fetchOptions = {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: userData,
+          };
+          fetch("http://localhost:8000/profiles", fetchOptions);
           setSubmitting(false);
         }, 400);
       }}

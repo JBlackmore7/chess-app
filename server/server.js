@@ -8,10 +8,10 @@ const cors = require("cors");
 
 const app = express();
 const chessProfile = {
-  name: "Jared",
-  difficulyLevel: "Intermediate",
-  username: "Jar",
+  firstName: "Jared",
+  lastName: "Blackmore",
   email: "555@fake.com",
+  difficulyLevel: "Intermediate",
 };
 const profiles = [chessProfile];
 
@@ -19,20 +19,33 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/profiles", (request, response) => {
+  response.json({ ChessProfiles: profiles });
   console.log("here2", response.body);
-  response.json(profiles);
 });
 
-app.post("/profiles", (request, response) => {
+app.post("/profiles/:profileID", (request, response) => {
   console.log("here1", request.body);
   profiles.push({
-    name: request.body.name,
-    difficulyLevel: request.body.difficulty,
-    username: request.body.username,
+    firstName: request.body.firstName,
+    lastName: request.body.lastName,
     email: request.body.email,
+    difficulyLevel: request.body.difficulty,
   });
-  // response.json({ profiles: chessProfile });
 });
+
+const postUser = (userInfo) => {
+  app.post("/profiles", (request, response) => {
+    console.log("here1", request.body);
+    profiles.push({
+      firstName: request.body.firstName,
+      lastName: request.body.lastName,
+      email: request.body.email,
+      difficulyLevel: request.body.difficulty,
+    });
+
+    // response.json({ profiles: chessProfile });
+  });
+};
 
 app.listen(8000, () => {
   console.log(`Server is running on port 8000.`);
