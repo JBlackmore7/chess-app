@@ -11,6 +11,7 @@ const chessProfile = {
   firstName: "Jared",
   lastName: "Blackmore",
   email: "555@fake.com",
+  userName: "JBlackmore",
   difficulyLevel: "Intermediate",
 };
 const profiles = [chessProfile];
@@ -23,29 +24,22 @@ app.get("/profiles", (request, response) => {
   console.log("here2", response.body);
 });
 
-app.post("/profiles/:profileID", (request, response) => {
+app.post("/profiles", (request, response) => {
   console.log("here1", request.body);
   profiles.push({
     firstName: request.body.firstName,
     lastName: request.body.lastName,
     email: request.body.email,
+    userName: request.body.userName,
     difficulyLevel: request.body.difficulty,
   });
 });
 
-const postUser = (userInfo) => {
-  app.post("/profiles", (request, response) => {
-    console.log("here1", request.body);
-    profiles.push({
-      firstName: request.body.firstName,
-      lastName: request.body.lastName,
-      email: request.body.email,
-      difficulyLevel: request.body.difficulty,
-    });
+app.put("/", (request, response) => {});
 
-    // response.json({ profiles: chessProfile });
-  });
-};
+app.delete("/", (req, res) => {
+  res.send("Got a DELETE request at /user");
+});
 
 app.listen(8000, () => {
   console.log(`Server is running on port 8000.`);
