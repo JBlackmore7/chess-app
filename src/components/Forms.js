@@ -2,6 +2,22 @@ import React from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
+// const CheckUsernameAvailability = (value) => {
+//   return fetch("http://localhost:8000/profiles", { value })
+//       .then(response => {
+//         if (response.ok) {
+
+//         }
+//         resolve(true);
+//       })
+//       .catch((error) => {
+//         if (error.response.data.content === "The username has already been taken") {
+//           resolve(false);
+//         }
+//       });
+//   });
+// };
+
 const SignupForm = () => {
   return (
     <Formik
@@ -12,22 +28,10 @@ const SignupForm = () => {
         firstName: Yup.string().max(15, "Must be 15 characters or less").required("Required"),
         lastName: Yup.string().max(20, "Must be 20 characters or less").required("Required"),
         email: Yup.string().email("Invalid email address").required("Required"),
-        userName: Yup.string()
-          .min(3, "Minimum 3 characters")
-          .required("Required")
-          .test("userName,", "Username already in use", function (value) {
-            return new Promise((resolve, reject) => {
-              fetch("http://localhost:8000/profiles", { value })
-                .then((resolve) => {
-                  resolve(true);
-                })
-                .catch((error) => {
-                  if (error.response.data.content === "The username has already been taken") {
-                    resolve(false);
-                  }
-                });
-            });
-          }),
+        userName: Yup.string().min(3, "Minimum 3 characters").required("Required"),
+        // .test("userName,", "Username already in use", function (userName) {
+        //   return CheckUsernameAvailability(userName);
+        // })
         difficulty: Yup.string().required("Required"),
       })}
       onSubmit={(values, { setSubmitting }) => {
